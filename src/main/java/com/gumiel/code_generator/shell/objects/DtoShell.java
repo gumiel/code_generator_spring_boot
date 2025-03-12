@@ -42,7 +42,7 @@ public class DtoShell {
     }
 
     public void fillNamePackage() {
-        this.namePackage = ConfigShell.DTO_PACKAGE+"\n\n";
+        this.namePackage = "package "+ConfigShell.DTO_PACKAGE+"\n\n";
     }
 
     public void fillImports() {

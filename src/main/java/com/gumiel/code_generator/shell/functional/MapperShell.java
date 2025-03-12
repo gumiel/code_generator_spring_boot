@@ -37,11 +37,11 @@ public class MapperShell extends ToolsShell {
     }
     public StringBuilder generateStringMapper() {
         StringBuilder builder = new StringBuilder();
-        builder.append(ConfigShell.MAPPER_PACKAGE).append("\n\n")
-                .append("import com.gestion.almacenes.commons.util.PagePojo;\n")
-                .append("import com.gestion.almacenes.dtos.").append(dtoShell.getNameDto()).append(";\n")
-                .append("import com.gestion.almacenes.entities.").append(entityShell.getNameEntity()).append(";\n")
-                .append("import com.gestion.almacenes.pojos.").append(pojoShell.getNamePojo()).append(";\n")
+        builder.append("package "+ConfigShell.MAPPER_PACKAGE).append("\n\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
                 .append("import org.springframework.data.domain.Page;\n")
                 .append("import org.springframework.stereotype.Component;\n\n")
                 .append("import java.util.List;\n")

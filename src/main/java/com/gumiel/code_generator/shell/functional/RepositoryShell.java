@@ -35,8 +35,8 @@ public class RepositoryShell extends ToolsShell {
         String repositoryShellName = this.getNameRepository();
 
         StringBuilder builder = new StringBuilder();
-        builder.append(ConfigShell.REPOSITORY_PACKAGE).append("\n\n")
-                .append("import com.gestion.almacenes.entities.").append(entityShellName).append(";\n")
+        builder.append("package "+ConfigShell.REPOSITORY_PACKAGE).append("\n\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
                 .append("import org.springframework.data.domain.Page;\n")
                 .append("import org.springframework.data.domain.Pageable;\n")
                 .append("import org.springframework.data.jpa.domain.Specification;\n")

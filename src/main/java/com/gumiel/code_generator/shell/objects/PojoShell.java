@@ -43,7 +43,7 @@ public class PojoShell {
     }
 
     public void fillNamePackage() {
-        this.namePackage = ConfigShell.POJO_PACKAGE+"\n\n";
+        this.namePackage = "package "+ConfigShell.POJO_PACKAGE+"\n\n";
     }
 
     public void fillImports() {

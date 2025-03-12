@@ -36,12 +36,12 @@ public class ServiceShell {
     public StringBuilder generateStringService(){
         StringBuilder builder = new StringBuilder();
         return builder
-                .append(ConfigShell.SERVICE_PACKAGE).append("\n\n")
-                .append("import com.gestion.almacenes.commons.util.PagePojo;\n")
-                .append("import com.gestion.almacenes.dtos.").append(dtoShell.getNameDto()).append(";\n")
-                .append("import com.gestion.almacenes.entities.").append(entityShell.getNameEntity()).append(";\n")
-                .append("import com.gestion.almacenes.filters.").append(filterShell.getNameFilter()).append(";\n")
-                .append("import com.gestion.almacenes.pojos.").append(pojoShell.getNamePojo()).append(";\n")
+                .append("package "+ConfigShell.SERVICE_PACKAGE).append("\n\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".filters.").append(filterShell.getNameFilter()).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
                 .append("\n")
                 .append("import java.util.List;\n")
                 .append("\n")

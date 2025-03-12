@@ -43,7 +43,7 @@ public class FilterShell {
     }
 
     public void fillNamePackage() {
-        this.namePackage = ConfigShell.FILTER_PACKAGE+"\n\n";
+        this.namePackage = "package "+ConfigShell.FILTER_PACKAGE+"\n\n";
     }
 
     public void fillImports() {

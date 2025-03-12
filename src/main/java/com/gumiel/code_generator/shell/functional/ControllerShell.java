@@ -54,14 +54,14 @@ public class ControllerShell extends ToolsShell {
 
         StringBuilder builder = new StringBuilder();
         return builder
-                .append(ConfigShell.CONTROLLER_PACKAGE).append("\n\n")
-                .append("import com.gestion.almacenes.commons.ResponseEntityGeneric;\n")
-                .append("import com.gestion.almacenes.commons.util.PagePojo;\n")
-                .append("import com.gestion.almacenes.dtos.").append(dtoShellName).append(";\n")
-                .append("import com.gestion.almacenes.entities.").append(entityShellName).append(";\n")
-                .append("import com.gestion.almacenes.filters.").append(filterShellName).append(";\n")
-                .append("import com.gestion.almacenes.pojos.").append(pojoShellName).append(";\n")
-                .append("import com.gestion.almacenes.services.").append(serviceShellName).append(";\n")
+                .append("package "+ConfigShell.CONTROLLER_PACKAGE).append("\n\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".commons.ResponseEntityGeneric;\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
+                .append("import "+ConfigShell.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
                 .append("import io.swagger.v3.oas.annotations.Operation;\n")
                 .append("import io.swagger.v3.oas.annotations.tags.Tag;\n")
                 .append("import jakarta.validation.Valid;\n")
