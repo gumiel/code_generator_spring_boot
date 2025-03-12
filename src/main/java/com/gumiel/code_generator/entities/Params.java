@@ -19,4 +19,6 @@ public class Params {
   private String paramValue;
   @Column(length = 500, nullable = false)
   private String description;
+  @Column(name = "active")
+  private Boolean active;
 }

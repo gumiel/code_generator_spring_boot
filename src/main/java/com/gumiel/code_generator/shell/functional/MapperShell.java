@@ -47,7 +47,7 @@ public class MapperShell extends ToolsShell {
                 .append("import java.util.List;\n")
                 .append("import java.util.stream.Collectors;\n\n")
                 .append("@Component\n")
-                .append("public class ").append(this.nameMapper).append(" extends GenericMapper {\n\n")
+                .append("public class ").append(this.nameMapper).append(" {\n\n")
                 .append("  public ").append(entityShell.getNameEntity()).append(" fromDtoToEntity(").append(dtoShell.getNameDto()).append(" dto, ").append(entityShell.getNameEntity()).append(" entityFound) {\n\n")
                 .append("    ").append(entityShell.getNameEntity()).append(" entity = (entityFound != null) ?\n")
                 .append("            entityFound :\n")

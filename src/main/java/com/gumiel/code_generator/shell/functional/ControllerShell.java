@@ -44,18 +44,14 @@ public class ControllerShell extends ToolsShell {
         String entityShellName = entityShell.getNameEntity();
         String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
         String dtoShellName = dtoShell.getNameDto();
-        String dtoShellNameLC = UtilShell.getFirstLetterLowerCase(dtoShell.getNameDto());
         String filterShellName = filterShell.getNameFilter();
-        String filterShellNameLC = UtilShell.getFirstLetterLowerCase(filterShellName);
         String pojoShellName = pojoShell.getNamePojo();
-        String pojoShellNameLC = UtilShell.getFirstLetterLowerCase(pojoShellName);
         String serviceShellName = serviceShell.getNameService();
         String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
 
         StringBuilder builder = new StringBuilder();
         return builder
                 .append("package "+ConfigShell.CONTROLLER_PACKAGE).append("\n\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".commons.ResponseEntityGeneric;\n")
                 .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
                 .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
                 .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
@@ -66,6 +62,7 @@ public class ControllerShell extends ToolsShell {
                 .append("import io.swagger.v3.oas.annotations.tags.Tag;\n")
                 .append("import jakarta.validation.Valid;\n")
                 .append("import lombok.AllArgsConstructor;\n")
+                .append("import org.springframework.http.HttpStatus;\n")
                 .append("import org.springframework.http.ResponseEntity;\n")
                 .append("import org.springframework.web.bind.annotation.*;\n")
                 .append("\n")
@@ -79,83 +76,19 @@ public class ControllerShell extends ToolsShell {
                 .append("\n")
                 .append("  private final ").append(serviceShellName).append(" ").append(serviceShellNameLC).append(";\n")
                 .append("\n")
-                .append("  @Operation(summary = \"Obtener todos los registros\")\n")
-                .append("  @GetMapping\n")
-                .append("  public ResponseEntity<List<").append(pojoShellName).append(">> getAll() {\n")
+                .append(methodGetAll())
                 .append("\n")
-                .append("    return ResponseEntityGeneric.statusGET(\n")
-                .append("        ").append(serviceShellNameLC).append(".getAll()\n")
-                .append("    );\n")
+                .append(methodCreate())
                 .append("\n")
-                .append("  }\n")
+                .append(methodUpdate())
                 .append("\n")
-                .append("  @Operation(summary = \"Creación del registro\")\n")
-                .append("  @PostMapping\n")
-                .append("  public ResponseEntity<").append(pojoShellName).append("> create(@Valid @RequestBody ").append(dtoShellName).append(" dto) {\n")
+                .append(methodGetById())
                 .append("\n")
-                .append("    return ResponseEntityGeneric.statusPOST(\n")
-                .append("        ").append(serviceShellNameLC).append(".create(dto)\n")
-                .append("    );\n")
+                .append(methodDelete())
                 .append("\n")
-                .append("  }\n")
+                .append(methodDisabled())
                 .append("\n")
-                .append("  @Operation(summary = \"Edición del registro\")\n")
-                .append("  @PutMapping(\"/{id}\")\n")
-                .append("  public ResponseEntity<").append(pojoShellName).append("> update(@PathVariable Integer id,\n")
-                .append("      @Valid @RequestBody ").append(dtoShellName).append(" dto) {\n")
-                .append("\n")
-                .append("    return ResponseEntityGeneric.statusPUT(\n")
-                .append("        ").append(serviceShellNameLC).append(".update(id, dto)\n")
-                .append("    );\n")
-                .append("\n")
-                .append("  }\n")
-                .append("\n")
-                .append("  @Operation(summary = \"Obtención de los datos del registro por el identificador\")\n")
-                .append("  @GetMapping(\"/{id}\")\n")
-                .append("  public ResponseEntity<").append(pojoShellName).append("> getById(@PathVariable Integer id) {\n")
-                .append("\n")
-                .append("    return ResponseEntityGeneric.statusGET(\n")
-                .append("        ").append(serviceShellNameLC).append(".getById(id)\n")
-                .append("    );\n")
-                .append("\n")
-                .append("  }\n")
-                .append("\n")
-                .append("  @Operation(summary = \"Eliminación del registro por el identificador\")\n")
-                .append("  @DeleteMapping(\"/{id}\")\n")
-                .append("  public ResponseEntity<Void> delete(@PathVariable Integer id) {\n")
-                .append("\n")
-                .append("    ").append(serviceShellNameLC).append(".delete(id);\n")
-                .append("    return ResponseEntityGeneric.statusDELETE();\n")
-                .append("\n")
-                .append("  }\n")
-                .append("\n")
-                .append("  @Operation(summary = \"Deshabilitar del registro por el identificador\")\n")
-                .append("  @DeleteMapping(\"/disabled/{id}\")\n")
-                .append("  public ResponseEntity<Void> disabled(@PathVariable Integer id) {\n")
-                .append("\n")
-                .append("    ").append(serviceShellNameLC).append(".disabled(id);\n")
-                .append("    return ResponseEntityGeneric.statusDELETE();\n")
-                .append("\n")
-                .append("  }\n")
-                .append("\n")
-                .append("  @Operation(summary = \"Paginador y buscador de registros por atributos\")\n")
-                .append("  @GetMapping(\"/pageable\")\n")
-                .append("  public ResponseEntity<PagePojo<").append(pojoShellName).append(">> pageable(\n")
-                .append("      @RequestParam(defaultValue = \"0\") int page,\n")
-                .append("      @RequestParam(defaultValue = \"5\") int size,\n")
-                .append("      @RequestParam(defaultValue = \"id\") String sortField,\n")
-                .append("      @RequestParam(defaultValue = \"asc\") String sortOrder,\n")
-                .append(dataFilterRequestParam)
-                .append("  ) {\n")
-                .append("\n")
-                .append("    ").append(filterShellName).append(" filter = ").append(filterShellName).append(".builder()\n")
-                .append(dataFilter)
-                .append("            .build();\n")
-                .append("    return ResponseEntityGeneric.statusGET(\n")
-                .append("        ").append(serviceShellNameLC).append(".pageable(page, size, sortField, sortOrder, filter)\n")
-                .append("    );\n")
-                .append("\n")
-                .append("  }\n")
+                .append(methodPageable())
                 .append("\n")
                 .append("}\n");
     }
@@ -192,6 +125,168 @@ public class ControllerShell extends ToolsShell {
         dataFilter = bodyV1;
     }
 
+    private StringBuilder methodGetAll(){
+        StringBuilder method = new StringBuilder();
 
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+        method.append("  @Operation(summary = \"Obtener todos los registros\")\n")
+            .append("  @GetMapping\n")
+            .append("  public ResponseEntity<List<").append(pojoShellName).append(">> getAll() {\n")
+            .append("\n")
+            .append("    return ResponseEntity.status(HttpStatus.OK).body(\n")
+            .append("        ").append(serviceShellNameLC).append(".getAll()\n")
+            .append("    );\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
+
+    private StringBuilder methodCreate(){
+
+        StringBuilder method = new StringBuilder();
+        String entityShellName = entityShell.getNameEntity();
+        String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
+        String dtoShellName = dtoShell.getNameDto();
+        String filterShellName = filterShell.getNameFilter();
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+
+        method.append("  @Operation(summary = \"Creación del registro\")\n")
+            .append("  @PostMapping\n")
+            .append("  public ResponseEntity<").append(pojoShellName).append("> create(@Valid @RequestBody ").append(dtoShellName).append(" dto) {\n")
+            .append("\n")
+            .append("    return ResponseEntity.status(HttpStatus.CREATED).body(\n")
+            .append("        ").append(serviceShellNameLC).append(".create(dto)\n")
+            .append("    );\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
+
+    private StringBuilder methodUpdate(){
+
+        StringBuilder method = new StringBuilder();
+        String entityShellName = entityShell.getNameEntity();
+        String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
+        String dtoShellName = dtoShell.getNameDto();
+        String filterShellName = filterShell.getNameFilter();
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+
+        method.append("  @Operation(summary = \"Edición del registro\")\n")
+            .append("  @PutMapping(\"/{id}\")\n")
+            .append("  public ResponseEntity<").append(pojoShellName).append("> update(@PathVariable Integer id,\n")
+            .append("      @Valid @RequestBody ").append(dtoShellName).append(" dto) {\n")
+            .append("\n")
+            .append("    return ResponseEntity.status(HttpStatus.CREATED).body(\n")
+            .append("        ").append(serviceShellNameLC).append(".update(id, dto)\n")
+            .append("    );\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
+
+    private StringBuilder methodGetById(){
+
+        StringBuilder method = new StringBuilder();
+        String entityShellName = entityShell.getNameEntity();
+        String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
+        String dtoShellName = dtoShell.getNameDto();
+        String filterShellName = filterShell.getNameFilter();
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+
+        method.append("  @Operation(summary = \"Obtención de los datos del registro por el identificador\")\n")
+            .append("  @GetMapping(\"/{id}\")\n")
+            .append("  public ResponseEntity<").append(pojoShellName).append("> getById(@PathVariable Integer id) {\n")
+            .append("\n")
+            .append("    return ResponseEntity.status(HttpStatus.OK).body(\n")
+            .append("        ").append(serviceShellNameLC).append(".getById(id)\n")
+            .append("    );\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
+
+    private StringBuilder methodDelete(){
+
+        StringBuilder method = new StringBuilder();
+        String entityShellName = entityShell.getNameEntity();
+        String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
+        String dtoShellName = dtoShell.getNameDto();
+        String filterShellName = filterShell.getNameFilter();
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+
+        method.append("  @Operation(summary = \"Eliminación del registro por el identificador\")\n")
+            .append("  @DeleteMapping(\"/{id}\")\n")
+            .append("  public ResponseEntity<Void> delete(@PathVariable Integer id) {\n")
+            .append("\n")
+            .append("    ").append(serviceShellNameLC).append(".delete(id);\n")
+            .append("    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
+
+    private StringBuilder methodDisabled(){
+
+        StringBuilder method = new StringBuilder();
+        String entityShellName = entityShell.getNameEntity();
+        String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
+        String dtoShellName = dtoShell.getNameDto();
+        String filterShellName = filterShell.getNameFilter();
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+
+        method.append("  @Operation(summary = \"Deshabilitar del registro por el identificador\")\n")
+            .append("  @DeleteMapping(\"/disabled/{id}\")\n")
+            .append("  public ResponseEntity<Void> disabled(@PathVariable Integer id) {\n")
+            .append("\n")
+            .append("    ").append(serviceShellNameLC).append(".disabled(id);\n")
+            .append("    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
+
+    private StringBuilder methodPageable(){
+
+        StringBuilder method = new StringBuilder();
+        String entityShellName = entityShell.getNameEntity();
+        String entityShellNameLC = UtilShell.getFirstLetterLowerCase(entityShellName);
+        String dtoShellName = dtoShell.getNameDto();
+        String filterShellName = filterShell.getNameFilter();
+        String pojoShellName = pojoShell.getNamePojo();
+        String serviceShellName = serviceShell.getNameService();
+        String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
+
+        method.append("  @Operation(summary = \"Paginador y buscador de registros por atributos\")\n")
+            .append("  @GetMapping(\"/pageable\")\n")
+            .append("  public ResponseEntity<PagePojo<").append(pojoShellName).append(">> pageable(\n")
+            .append("      @RequestParam(defaultValue = \"0\") int page,\n")
+            .append("      @RequestParam(defaultValue = \"5\") int size,\n")
+            .append("      @RequestParam(defaultValue = \"id\") String sortField,\n")
+            .append("      @RequestParam(defaultValue = \"asc\") String sortOrder,\n")
+            .append(dataFilterRequestParam)
+            .append("  ) {\n")
+            .append("\n")
+            .append("    ").append(filterShellName).append(" filter = ").append(filterShellName).append(".builder()\n")
+            .append(dataFilter)
+            .append("            .build();\n")
+            .append("    return ResponseEntity.status(HttpStatus.OK).body(\n")
+            .append("        ").append(serviceShellNameLC).append(".pageable(page, size, sortField, sortOrder, filter)\n")
+            .append("    );\n")
+            .append("\n")
+            .append("  }\n");
+        return method;
+    }
 
 }
