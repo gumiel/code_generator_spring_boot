@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.ConfigShell;
+import com.gumiel.code_generator.shell.Parameter;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
@@ -51,13 +51,13 @@ public class ControllerShell extends ToolsShell {
 
         StringBuilder builder = new StringBuilder();
         return builder
-                .append("package "+ConfigShell.CONTROLLER_PACKAGE).append("\n\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
+                .append("package "+ Parameter.CONTROLLER_PACKAGE).append("\n\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
                 .append("import io.swagger.v3.oas.annotations.Operation;\n")
                 .append("import io.swagger.v3.oas.annotations.tags.Tag;\n")
                 .append("import jakarta.validation.Valid;\n")

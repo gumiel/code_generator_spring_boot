@@ -1,8 +1,7 @@
 package com.gumiel.code_generator.shell.objects;
 
-import com.gumiel.code_generator.shell.ConfigShell;
+import com.gumiel.code_generator.shell.Parameter;
 import com.gumiel.code_generator.shell.commons.UtilShell;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class FilterShell {
     }
 
     public void fillNamePackage() {
-        this.namePackage = "package "+ConfigShell.FILTER_PACKAGE+"\n\n";
+        this.namePackage = "package "+ Parameter.FILTER_PACKAGE+"\n\n";
     }
 
     public void fillImports() {

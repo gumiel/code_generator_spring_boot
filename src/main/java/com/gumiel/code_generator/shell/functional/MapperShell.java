@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.ConfigShell;
+import com.gumiel.code_generator.shell.Parameter;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
@@ -37,11 +37,11 @@ public class MapperShell extends ToolsShell {
     }
     public StringBuilder generateStringMapper() {
         StringBuilder builder = new StringBuilder();
-        builder.append("package "+ConfigShell.MAPPER_PACKAGE).append("\n\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
+        builder.append("package "+ Parameter.MAPPER_PACKAGE).append("\n\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
                 .append("import org.springframework.data.domain.Page;\n")
                 .append("import org.springframework.stereotype.Component;\n\n")
                 .append("import java.util.List;\n")

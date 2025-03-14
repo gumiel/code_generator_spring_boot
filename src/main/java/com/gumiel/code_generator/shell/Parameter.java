@@ -6,9 +6,9 @@ package com.gumiel.code_generator.shell;
  * Creado por: Henry Perez Gumiel
  * Fecha: 09/03/2025
  */
-public class ConfigShell {
+public class Parameter {
 
-    private ConfigShell() {
+    private Parameter() {
         throw new IllegalStateException("Utility class");
     }
 

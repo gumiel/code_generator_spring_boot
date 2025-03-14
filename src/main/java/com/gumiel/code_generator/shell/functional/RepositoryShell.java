@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.ConfigShell;
+import com.gumiel.code_generator.shell.Parameter;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
@@ -35,8 +35,8 @@ public class RepositoryShell extends ToolsShell {
         String repositoryShellName = this.getNameRepository();
 
         StringBuilder builder = new StringBuilder();
-        builder.append("package "+ConfigShell.REPOSITORY_PACKAGE).append("\n\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
+        builder.append("package "+ Parameter.REPOSITORY_PACKAGE).append("\n\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
                 .append("import org.springframework.data.domain.Page;\n")
                 .append("import org.springframework.data.domain.Pageable;\n")
                 .append("import org.springframework.data.jpa.domain.Specification;\n")

@@ -18,7 +18,7 @@ public class MyCommandsV1 {
 
     @ShellMethod(key = "list")
     public List<String> listEntitiesClasses() throws ClassNotFoundException {
-        return UtilShell.listClassesInPackage(ConfigShell.ENTITIES_NAME_PATH);
+        return UtilShell.listClassesInPackage(Parameter.ENTITIES_NAME_PATH);
     }
 
     @ShellMethod(key = "all")
@@ -26,8 +26,8 @@ public class MyCommandsV1 {
 
         Class<?> clazz = null;
         if (!className.contains(".")) {
-            System.out.println(ConfigShell.ENTITIES_PACKAGE_SIMPLE+className);
-            clazz = Class.forName(ConfigShell.ENTITIES_PACKAGE_SIMPLE+className);
+            System.out.println(Parameter.ENTITIES_PACKAGE_SIMPLE+className);
+            clazz = Class.forName(Parameter.ENTITIES_PACKAGE_SIMPLE+className);
         }else{
             clazz = Class.forName(className);
         }
@@ -64,30 +64,30 @@ public class MyCommandsV1 {
         ImplementShell implementShell = new ImplementShell(entityShell, dtoShell, filterShell, pojoShell, mapperShell, serviceShell, repositoryShell);
 
         if(param==null){
-            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), ConfigShell.DTO_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), ConfigShell.FILTER_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), ConfigShell.POJO_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), ConfigShell.SERVICE_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), ConfigShell.CONTROLLER_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), ConfigShell.MAPPER_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), ConfigShell.REPOSITORY_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), ConfigShell.IMPLEMENT_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), Parameter.DTO_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), Parameter.FILTER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), Parameter.POJO_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), Parameter.SERVICE_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), Parameter.CONTROLLER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), Parameter.MAPPER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), Parameter.REPOSITORY_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), Parameter.IMPLEMENT_NAME_PATH);
         }else if(param.equals("DTO")){
-            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), ConfigShell.DTO_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), Parameter.DTO_NAME_PATH);
         } else if (param.equals("FILTER")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), ConfigShell.FILTER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), Parameter.FILTER_NAME_PATH);
         } else if (param.equals("POJO")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), ConfigShell.POJO_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), Parameter.POJO_NAME_PATH);
         } else if (param.equals("SERVICE")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), ConfigShell.SERVICE_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), Parameter.SERVICE_NAME_PATH);
         } else if (param.equals("CONTROLLER")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), ConfigShell.CONTROLLER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), Parameter.CONTROLLER_NAME_PATH);
         } else if (param.equals("MAPPER")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), ConfigShell.MAPPER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), Parameter.MAPPER_NAME_PATH);
         } else if (param.equals("REPOSITORY")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), ConfigShell.REPOSITORY_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), Parameter.REPOSITORY_NAME_PATH);
         } else if (param.equals("IMPLEMENT")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), ConfigShell.IMPLEMENT_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), Parameter.IMPLEMENT_NAME_PATH);
         }
 
         return dtoBuilder.toString();
@@ -137,21 +137,21 @@ public class MyCommandsV1 {
     @ShellMethod(key = "remove")
     public String removeEntityFile(@ShellOption String className) throws IOException {
 
-        String filePath = ConfigShell.BASE_NAME_PATH + "/dtos/" + className + "Dto_bk.java";
+        String filePath = Parameter.BASE_NAME_PATH + "/dtos/" + className + "Dto_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/filters/" + className + "Filter_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/filters/" + className + "Filter_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/pojos/" + className + "Pojo_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/pojos/" + className + "Pojo_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/services/" + className + "Service_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/services/" + className + "Service_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/controllers/" + className + "Controller_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/controllers/" + className + "Controller_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/mappers/" + className + "Mapper_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/mappers/" + className + "Mapper_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/repositories/" + className + "Repository_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/repositories/" + className + "Repository_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = ConfigShell.BASE_NAME_PATH + "/servicesImpls/" + className + "ServiceImpl_bk.java";
+        filePath = Parameter.BASE_NAME_PATH + "/servicesImpls/" + className + "ServiceImpl_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
 
         return "File " + className + " deleted successfully.";

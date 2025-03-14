@@ -1,4 +1,4 @@
-package com.gumiel.code_generator.config;
+package com.gumiel.code_generator.shell.commons;
 
 import org.jline.utils.AttributedString;
 import org.springframework.context.annotation.Bean;

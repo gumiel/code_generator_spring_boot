@@ -1,12 +1,11 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.ConfigShell;
+import com.gumiel.code_generator.shell.Parameter;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
 import com.gumiel.code_generator.shell.objects.EntityShell;
 import com.gumiel.code_generator.shell.objects.FilterShell;
 import com.gumiel.code_generator.shell.objects.PojoShell;
-import lombok.Getter;
 
 /**
  * Clase ServiceShell
@@ -36,12 +35,12 @@ public class ServiceShell {
     public StringBuilder generateStringService(){
         StringBuilder builder = new StringBuilder();
         return builder
-                .append("package "+ConfigShell.SERVICE_PACKAGE).append("\n\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".filters.").append(filterShell.getNameFilter()).append(";\n")
-                .append("import "+ConfigShell.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
+                .append("package "+ Parameter.SERVICE_PACKAGE).append("\n\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".filters.").append(filterShell.getNameFilter()).append(";\n")
+                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
                 .append("\n")
                 .append("import java.util.List;\n")
                 .append("\n")
