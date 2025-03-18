@@ -64,7 +64,7 @@ public class RepositoryShell extends ToolsShell {
         StringBuilder query = new StringBuilder();
 
         query.append("  @Query(\"\"\"\n")
-             .append("          SELECT C\n")
+             .append("          SELECT ").append(alias).append("\n")
              .append("          FROM ").append(entityName).append(" ").append(alias).append("\n")
              .append("          WHERE ").append(alias).append(".active = TRUE\n")
              .append(this.findAllWithAnd())
