@@ -48,3 +48,9 @@
 1742174038378:remove Person
 1742174062929:git st
 1742266026687:repository UnitMeasurement
+1742266685946:repository Supplier
+1742267017684:controller Supplier
+1742267975677:repository StorehouseType
+1742268156925:controller StorehouseType
+1742268837459:repository Storehouse
+1742268994618:controller Storehouse

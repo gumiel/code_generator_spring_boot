@@ -120,8 +120,10 @@ public class ControllerShell extends ToolsShell {
                             "            ."+atributesShell.getNameAtributes()+"("+atributesShell.getNameAtributes()+")":
                             "            ."+atributesShell.getNameAtributes()+"Id("+atributesShell.getNameAtributes()+"Id)"
             );
+
             bodyV1.append("\n");
         });
+        bodyV1.append("            .search(search)");
         dataFilter = bodyV1;
     }
 
@@ -275,6 +277,7 @@ public class ControllerShell extends ToolsShell {
             .append("      @RequestParam(defaultValue = \"5\") int size,\n")
             .append("      @RequestParam(defaultValue = \"id\") String sortField,\n")
             .append("      @RequestParam(defaultValue = \"asc\") String sortOrder,\n")
+            .append("      @RequestParam(required = false) String search,\n")
             .append(dataFilterRequestParam)
             .append("  ) {\n")
             .append("\n")

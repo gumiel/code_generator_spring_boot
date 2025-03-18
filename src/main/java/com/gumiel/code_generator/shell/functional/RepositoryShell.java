@@ -70,7 +70,7 @@ public class RepositoryShell extends ToolsShell {
              .append(this.findAllWithAnd())
              .append(this.findAllWithAndSearch())
              .append("  \"\"\")\n")
-             .append("  Page<").append(entityName).append("> findAll(").append(filterShell.getNameFilter()).append(" filter, Pageable pageable);\n");
+             .append("  Page<").append(entityName).append("> pageable(").append(filterShell.getNameFilter()).append(" filter, Pageable pageable);\n");
         return query;
     }
 
