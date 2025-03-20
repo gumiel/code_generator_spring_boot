@@ -31,6 +31,8 @@ public class ToolsShell {
                 Objects.equals(type, "Integer") ||
                 Objects.equals(type, "String") ||
                 Objects.equals(type, "LocalTime") ||
+                Objects.equals(type, "Double") ||
+                Objects.equals(type, "BigDecimal") ||
                 Objects.equals(type, "LocalDate")
         );
     }
@@ -39,6 +41,8 @@ public class ToolsShell {
         return (
                 Objects.equals(type, "Integer") ||
                 Objects.equals(type, "LocalTime") ||
+                Objects.equals(type, "Double") ||
+                Objects.equals(type, "BigDecimal") ||
                 Objects.equals(type, "LocalDate")
         );
     }

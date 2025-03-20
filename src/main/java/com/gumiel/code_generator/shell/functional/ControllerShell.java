@@ -283,6 +283,7 @@ public class ControllerShell extends ToolsShell {
             .append("\n")
             .append("    ").append(filterShellName).append(" filter = ").append(filterShellName).append(".builder()\n")
             .append(dataFilter)
+            .append("\n")
             .append("            .build();\n")
             .append("    return ResponseEntity.status(HttpStatus.OK).body(\n")
             .append("        ").append(serviceShellNameLC).append(".pageable(page, size, sortField, sortOrder, filter)\n")
