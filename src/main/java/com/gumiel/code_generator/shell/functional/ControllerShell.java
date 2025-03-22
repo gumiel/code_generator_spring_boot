@@ -66,6 +66,9 @@ public class ControllerShell extends ToolsShell {
                 .append("import org.springframework.http.ResponseEntity;\n")
                 .append("import org.springframework.web.bind.annotation.*;\n")
                 .append("\n")
+                .append("import java.time.LocalDate;\n")
+                .append("import java.time.LocalTime;\n")
+                .append("import java.time.LocalDateTime;\n")
                 .append("import java.util.List;\n")
                 .append("\n")
                 .append("@AllArgsConstructor\n")
@@ -120,8 +123,10 @@ public class ControllerShell extends ToolsShell {
                             "            ."+atributesShell.getNameAtributes()+"("+atributesShell.getNameAtributes()+")":
                             "            ."+atributesShell.getNameAtributes()+"Id("+atributesShell.getNameAtributes()+"Id)"
             );
+
             bodyV1.append("\n");
         });
+        bodyV1.append("            .search(search)");
         dataFilter = bodyV1;
     }
 
@@ -275,11 +280,13 @@ public class ControllerShell extends ToolsShell {
             .append("      @RequestParam(defaultValue = \"5\") int size,\n")
             .append("      @RequestParam(defaultValue = \"id\") String sortField,\n")
             .append("      @RequestParam(defaultValue = \"asc\") String sortOrder,\n")
+            .append("      @RequestParam(required = false) String search,\n")
             .append(dataFilterRequestParam)
             .append("  ) {\n")
             .append("\n")
             .append("    ").append(filterShellName).append(" filter = ").append(filterShellName).append(".builder()\n")
             .append(dataFilter)
+            .append("\n")
             .append("            .build();\n")
             .append("    return ResponseEntity.status(HttpStatus.OK).body(\n")
             .append("        ").append(serviceShellNameLC).append(".pageable(page, size, sortField, sortOrder, filter)\n")

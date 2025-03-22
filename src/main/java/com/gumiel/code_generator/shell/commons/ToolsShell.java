@@ -17,13 +17,45 @@ public class ToolsShell {
     public boolean isTypeValid(String type){
         return (
                 Objects.equals(type, "Integer") ||
-                        Objects.equals(type, "String") ||
-                        Objects.equals(type, "Boolean") ||
-                        Objects.equals(type, "Double") ||
-                        Objects.equals(type, "LocalTime") ||
-                        Objects.equals(type, "LocalDate") ||
-                        Objects.equals(type, "BigDecimal")
+                Objects.equals(type, "String") ||
+                Objects.equals(type, "Boolean") ||
+                Objects.equals(type, "Double") ||
+                Objects.equals(type, "LocalTime") ||
+                Objects.equals(type, "LocalDate") ||
+                Objects.equals(type, "LocalDateTime") ||
+                Objects.equals(type, "BigDecimal")
         );
+    }
+
+    public boolean isTypeValidPageable(String type){
+        return (
+                Objects.equals(type, "Integer") ||
+                Objects.equals(type, "String") ||
+                Objects.equals(type, "LocalTime") ||
+                Objects.equals(type, "Double") ||
+                Objects.equals(type, "BigDecimal") ||
+                Objects.equals(type, "LocalDate") ||
+                Objects.equals(type, "LocalDateTime")
+        );
+    }
+
+    public boolean isTypeValidForEquals(String type){
+        return (
+                Objects.equals(type, "Integer") ||
+                Objects.equals(type, "LocalTime") ||
+                Objects.equals(type, "Double") ||
+                Objects.equals(type, "BigDecimal") ||
+                Objects.equals(type, "LocalDateTime") ||
+                Objects.equals(type, "LocalDate")
+        );
+    }
+
+    public boolean isTypeValidForLike(String type){
+        return (Objects.equals(type, "String"));
+    }
+
+    public boolean isTypeValidForSearch(String type){
+        return (Objects.equals(type, "String"));
     }
 
 }

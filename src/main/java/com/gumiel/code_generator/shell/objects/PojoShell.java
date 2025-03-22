@@ -1,6 +1,7 @@
 package com.gumiel.code_generator.shell.objects;
 
 import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Objects;
  * Creado por: Henry Perez Gumiel
  * Fecha: 09/03/2025
  */
-public class PojoShell {
+public class PojoShell extends ToolsShell {
     String namePojo;
     String namePojoLC;
     String namePackage;
@@ -106,22 +107,6 @@ public class PojoShell {
         dtoBuilder.append(body);
         dtoBuilder.append(endPojo);
         return dtoBuilder;
-    }
-
-    public String convertType(String type){
-        return ( !this.isTypeValid(type) ) ? "Integer": type;
-    }
-
-    public boolean isTypeValid(String type){
-        return (
-                Objects.equals(type, "Integer") ||
-                Objects.equals(type, "String") ||
-                Objects.equals(type, "Boolean") ||
-                Objects.equals(type, "Double") ||
-                Objects.equals(type, "LocalTime") ||
-                Objects.equals(type, "LocalDate") ||
-                Objects.equals(type, "BigDecimal")
-        );
     }
 
     public String getNamePojo() {

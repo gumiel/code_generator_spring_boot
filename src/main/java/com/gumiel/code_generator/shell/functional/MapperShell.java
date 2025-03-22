@@ -98,12 +98,14 @@ public class MapperShell extends ToolsShell {
         StringBuilder bodyV1 = new StringBuilder();
         entityShell.getAtributesShellList().forEach(attributesShell -> {
             String attributeUpperCase = UtilShell.getFirstLetterUpperCase(attributesShell.getNameAtributes());
-            bodyV1.append(
-                    (this.isTypeValid(attributesShell.getTypeAtributes())) ?
-                            "    entity.set"+attributeUpperCase+"( dto.get"+attributeUpperCase+"() );":
-                            "    entity.set"+attributeUpperCase+"Id( dto.get"+attributeUpperCase+"Id() );"
-            );
-            bodyV1.append("\n");
+            if(!"Id".equals(attributeUpperCase)){
+                bodyV1.append(
+                        (this.isTypeValid(attributesShell.getTypeAtributes())) ?
+                                "    entity.set"+attributeUpperCase+"( dto.get"+attributeUpperCase+"() );":
+                                "    entity.set"+attributeUpperCase+"Id( dto.get"+attributeUpperCase+"Id() );"
+                );
+                bodyV1.append("\n");
+            }
         });
         dataSettersEntity = bodyV1;
     }
