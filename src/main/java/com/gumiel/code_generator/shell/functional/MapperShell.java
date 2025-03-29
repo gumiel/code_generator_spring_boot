@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.ParamsV1;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
@@ -23,8 +23,10 @@ public class MapperShell extends ToolsShell {
     PojoShell pojoShell;
     StringBuilder dataSettersPojo;
     StringBuilder dataSettersEntity;
+    ParamsV1 pv1;
 
     public MapperShell(EntityShell entityShell, DtoShell dtoShell, PojoShell pojoShell) {
+        pv1 = new ParamsV1();
         this.entityShell = entityShell;
         this.dtoShell = dtoShell;
         this.pojoShell = pojoShell;
@@ -37,11 +39,11 @@ public class MapperShell extends ToolsShell {
     }
     public StringBuilder generateStringMapper() {
         StringBuilder builder = new StringBuilder();
-        builder.append("package "+ Parameter.MAPPER_PACKAGE).append("\n\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
+        builder.append("package "+ pv1.getMapperPackageName()).append("\n\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
                 .append("import org.springframework.data.domain.Page;\n")
                 .append("import org.springframework.stereotype.Component;\n\n")
                 .append("import java.util.List;\n")
@@ -83,9 +85,9 @@ public class MapperShell extends ToolsShell {
     public void fillByAttributesPojo(){
         StringBuilder bodyV1 = new StringBuilder();
         entityShell.getAtributesShellList().forEach(attributesShell -> {
-            String attributeUpperCase = UtilShell.getFirstLetterUpperCase(attributesShell.getNameAtributes());
+            String attributeUpperCase = UtilShell.getFirstLetterUpperCase(attributesShell.getNameAttributes());
             bodyV1.append(
-                    (this.isTypeValid(attributesShell.getTypeAtributes())) ?
+                    (this.isTypeValid(attributesShell.getTypeAttributes())) ?
                             "    pojo.set"+attributeUpperCase+"( entity.get"+attributeUpperCase+"() );":
                             "    pojo.set"+attributeUpperCase+"Id( entity.get"+attributeUpperCase+"Id() );"
             );
@@ -97,10 +99,10 @@ public class MapperShell extends ToolsShell {
     public void fillByAttributesEntity(){
         StringBuilder bodyV1 = new StringBuilder();
         entityShell.getAtributesShellList().forEach(attributesShell -> {
-            String attributeUpperCase = UtilShell.getFirstLetterUpperCase(attributesShell.getNameAtributes());
+            String attributeUpperCase = UtilShell.getFirstLetterUpperCase(attributesShell.getNameAttributes());
             if(!"Id".equals(attributeUpperCase)){
                 bodyV1.append(
-                        (this.isTypeValid(attributesShell.getTypeAtributes())) ?
+                        (this.isTypeValid(attributesShell.getTypeAttributes())) ?
                                 "    entity.set"+attributeUpperCase+"( dto.get"+attributeUpperCase+"() );":
                                 "    entity.set"+attributeUpperCase+"Id( dto.get"+attributeUpperCase+"Id() );"
                 );

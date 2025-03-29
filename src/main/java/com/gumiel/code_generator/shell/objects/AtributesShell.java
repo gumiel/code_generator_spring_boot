@@ -1,8 +1,6 @@
 package com.gumiel.code_generator.shell.objects;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -14,9 +12,9 @@ import java.util.List;
  */
 @NoArgsConstructor
 public class AtributesShell {
-    String nameAtributes;
-    String typeAtributes;
-    String importAtributes;
+    String nameAttributes;
+    String typeAttributes;
+    String importAttributes;
     List<String> anottationList;
 
     public List<String> getAnottationList() {
@@ -27,27 +25,27 @@ public class AtributesShell {
         this.anottationList = anottationList;
     }
 
-    public String getImportAtributes() {
-        return importAtributes;
+    public String getImportAttributes() {
+        return importAttributes;
     }
 
-    public void setImportAtributes(String importAtributes) {
-        this.importAtributes = importAtributes;
+    public void setImportAttributes(String importAttributes) {
+        this.importAttributes = importAttributes;
     }
 
-    public String getTypeAtributes() {
-        return typeAtributes;
+    public String getTypeAttributes() {
+        return typeAttributes;
     }
 
-    public void setTypeAtributes(String typeAtributes) {
-        this.typeAtributes = typeAtributes;
+    public void setTypeAttributes(String typeAttributes) {
+        this.typeAttributes = typeAttributes;
     }
 
-    public String getNameAtributes() {
-        return nameAtributes;
+    public String getNameAttributes() {
+        return nameAttributes;
     }
 
-    public void setNameAtributes(String nameAtributes) {
-        this.nameAtributes = nameAtributes;
+    public void setNameAttributes(String nameAttributes) {
+        this.nameAttributes = nameAttributes;
     }
 }

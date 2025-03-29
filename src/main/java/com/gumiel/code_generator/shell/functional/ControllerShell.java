@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.ParamsV1;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
@@ -25,8 +25,10 @@ public class ControllerShell extends ToolsShell {
     StringBuilder dataFilterRequestParam;
     StringBuilder dataFilter;
     PojoShell pojoShell;
+    ParamsV1 pv1;
 
     public ControllerShell(EntityShell entityShell, DtoShell dtoShell, FilterShell filterShell, ServiceShell serviceShell, PojoShell pojoShell) {
+        pv1 = new ParamsV1();
         this.entityShell = entityShell;
         this.dtoShell = dtoShell;
         this.filterShell = filterShell;
@@ -51,13 +53,13 @@ public class ControllerShell extends ToolsShell {
 
         StringBuilder builder = new StringBuilder();
         return builder
-                .append("package "+ Parameter.CONTROLLER_PACKAGE).append("\n\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
+                .append("package "+ pv1.getControllerPackageName()).append("\n\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".entities.").append(entityShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
                 .append("import io.swagger.v3.oas.annotations.Operation;\n")
                 .append("import io.swagger.v3.oas.annotations.tags.Tag;\n")
                 .append("import jakarta.validation.Valid;\n")
@@ -101,13 +103,13 @@ public class ControllerShell extends ToolsShell {
         entityShell.getAtributesShellList().forEach(atributesShell -> {
             bodyV1.append("      @RequestParam(required = false) ");
             bodyV1.append(
-                    this.convertType(atributesShell.getTypeAtributes())
+                    this.convertType(atributesShell.getTypeAttributes())
             );
             bodyV1.append(" ");
             bodyV1.append(
-                    (this.isTypeValid(atributesShell.getTypeAtributes())) ?
-                            atributesShell.getNameAtributes():
-                            atributesShell.getNameAtributes()+"Id"
+                    (this.isTypeValid(atributesShell.getTypeAttributes())) ?
+                            atributesShell.getNameAttributes():
+                            atributesShell.getNameAttributes()+"Id"
             );
             bodyV1.append(",\n");
         });
@@ -119,9 +121,9 @@ public class ControllerShell extends ToolsShell {
         StringBuilder bodyV1 = new StringBuilder();
         entityShell.getAtributesShellList().forEach(atributesShell -> {
             bodyV1.append(
-                    (this.isTypeValid(atributesShell.getTypeAtributes())) ?
-                            "            ."+atributesShell.getNameAtributes()+"("+atributesShell.getNameAtributes()+")":
-                            "            ."+atributesShell.getNameAtributes()+"Id("+atributesShell.getNameAtributes()+"Id)"
+                    (this.isTypeValid(atributesShell.getTypeAttributes())) ?
+                            "            ."+atributesShell.getNameAttributes()+"("+atributesShell.getNameAttributes()+")":
+                            "            ."+atributesShell.getNameAttributes()+"Id("+atributesShell.getNameAttributes()+"Id)"
             );
 
             bodyV1.append("\n");

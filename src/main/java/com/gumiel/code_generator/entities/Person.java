@@ -23,7 +23,7 @@ public class Person {
   private Integer id;
   @Column(length = 50, nullable = false)
   @Schema(description = "Nombres")
-  private String lastaName;
+  private String lastName;
   @Schema(description = "Apellidos")
   @Column(length = 50, nullable = false)
   private String firstName;

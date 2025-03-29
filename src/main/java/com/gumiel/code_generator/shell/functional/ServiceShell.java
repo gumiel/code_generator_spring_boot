@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.ParamsV1;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
 import com.gumiel.code_generator.shell.objects.EntityShell;
@@ -22,8 +22,10 @@ public class ServiceShell {
     DtoShell dtoShell;
     PojoShell pojoShell;
     FilterShell filterShell;
+    ParamsV1 pv1;
 
     public ServiceShell(EntityShell entityShell, DtoShell dtoShell, FilterShell filterShell, PojoShell pojoShell) {
+        pv1 = new ParamsV1();
         this.entityShell = entityShell;
         this.dtoShell = dtoShell;
         this.filterShell = filterShell;
@@ -35,12 +37,12 @@ public class ServiceShell {
     public StringBuilder generateStringService(){
         StringBuilder builder = new StringBuilder();
         return builder
-                .append("package "+ Parameter.SERVICE_PACKAGE).append("\n\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".filters.").append(filterShell.getNameFilter()).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
+                .append("package "+ pv1.getServicePackageName()).append("\n\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".dtos.").append(dtoShell.getNameDto()).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".entities.").append(entityShell.getNameEntity()).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".filters.").append(filterShell.getNameFilter()).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".pojos.").append(pojoShell.getNamePojo()).append(";\n")
                 .append("\n")
                 .append("import java.util.List;\n")
                 .append("\n")

@@ -1,18 +1,17 @@
 package com.gumiel.code_generator.shell.objects;
 
 
-import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.ParamsV1;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-
+@Getter
 public class DtoShell extends ToolsShell {
 
-    String pathName;
     String nameDto;
     String nameDtoLC;
     String namePackage;
@@ -22,17 +21,20 @@ public class DtoShell extends ToolsShell {
     String endDto;
     StringBuilder body;
     EntityShell entityShell;
+    ParamsV1 pv1;
 
     public DtoShell(EntityShell entityShell) {
-        this.pathName = "src/main/java/com/gestion/almacenes/dtos/";
+
         this.entityShell = entityShell;
         this.nameDto = entityShell.getNameEntity()+"Dto_bk";
         this.constructHeader();
         this.body = new StringBuilder();
         this.nameDtoLC = UtilShell.getFirstLetterLowerCase(this.nameDto);
+
     }
 
     public void constructHeader() {
+        pv1 = new ParamsV1();
         this.fillNamePackage();
         this.fillImports();
         this.fillAnottations();
@@ -42,7 +44,7 @@ public class DtoShell extends ToolsShell {
     }
 
     public void fillNamePackage() {
-        this.namePackage = "package "+ Parameter.DTO_PACKAGE+"\n\n";
+        this.namePackage = "package "+ pv1.getDtoPackageName()+"\n\n";
     }
 
     public void fillImports() {
@@ -71,13 +73,13 @@ public class DtoShell extends ToolsShell {
         entityShell.getAtributesShellList().forEach(atributesShell -> {
             bodyV1.append("private ");
             bodyV1.append(
-                    this.convertType(atributesShell.getTypeAtributes())
+                    this.convertType(atributesShell.getTypeAttributes())
             );
             bodyV1.append(" ");
             bodyV1.append(
-                    (this.isTypeValid(atributesShell.getTypeAtributes())) ?
-                            atributesShell.getNameAtributes():
-                            atributesShell.getNameAtributes()+"Id"
+                    (this.isTypeValid(atributesShell.getTypeAttributes())) ?
+                            atributesShell.getNameAttributes():
+                            atributesShell.getNameAttributes()+"Id"
             );
             bodyV1.append(";\n");
         });
@@ -108,45 +110,4 @@ public class DtoShell extends ToolsShell {
         return dtoBuilder;
     }
 
-
-
-    public String getPathName() {
-        return pathName;
-    }
-
-    public String getNameDto() {
-        return nameDto;
-    }
-
-    public String getNameDtoLC() {
-        return nameDtoLC;
-    }
-
-    public String getNamePackage() {
-        return namePackage;
-    }
-
-    public List<StringBuilder> getImportList() {
-        return importList;
-    }
-
-    public List<StringBuilder> getAnottationList() {
-        return anottationList;
-    }
-
-    public String getStartDto() {
-        return startDto;
-    }
-
-    public String getEndDto() {
-        return endDto;
-    }
-
-    public StringBuilder getBody() {
-        return body;
-    }
-
-    public EntityShell getEntityShell() {
-        return entityShell;
-    }
 }
