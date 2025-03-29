@@ -1,0 +1,27 @@
+package com.gumiel.code_generator.pojos;
+
+import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class PersonPojo_bk {
+private Integer id;
+private String lastaName;
+private String firstName;
+private Integer age;
+private String gender;
+private Boolean disability;
+private LocalDate birthdate;
+private LocalDate registrationDate;
+private LocalTime registrationTime;
+private LocalDateTime endDateTime;
+private Boolean active;
+}

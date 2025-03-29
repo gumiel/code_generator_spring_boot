@@ -74,7 +74,7 @@ public class ControllerShell extends ToolsShell {
                 .append("@AllArgsConstructor\n")
                 .append("@RestController\n")
                 .append("@RequestMapping(\"/").append(entityShellNameLC).append("_bk\")\n")
-                .append("@Tag(name = \"").append(entityShellName).append("_bk\", description = \"Gestión de productos. Los productos son los unicos que podran ingresar o salir a un almacen\")\n")
+                .append("@Tag(name = \"").append(entityShellName).append("_bk\", description = \"Gestión de [xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx].\")\n")
                 .append("public class ").append(this.nameController).append(" {\n")
                 .append("\n")
                 .append("  private final ").append(serviceShellName).append(" ").append(serviceShellNameLC).append(";\n")
@@ -251,7 +251,7 @@ public class ControllerShell extends ToolsShell {
         String serviceShellName = serviceShell.getNameService();
         String serviceShellNameLC = UtilShell.getFirstLetterLowerCase(serviceShellName);
 
-        method.append("  @Operation(summary = \"Deshabilitar del registro por el identificador\")\n")
+        method.append("  @Operation(summary = \"Deshabilitar el registro por el identificador\")\n")
             .append("  @DeleteMapping(\"/disabled/{id}\")\n")
             .append("  public ResponseEntity<Void> disabled(@PathVariable Integer id) {\n")
             .append("\n")
