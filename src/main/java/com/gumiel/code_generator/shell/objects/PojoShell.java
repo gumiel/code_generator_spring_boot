@@ -1,12 +1,11 @@
 package com.gumiel.code_generator.shell.objects;
 
-import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.ParamsV1;
 import com.gumiel.code_generator.shell.commons.ToolsShell;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Clase PojoShell
@@ -24,6 +23,7 @@ public class PojoShell extends ToolsShell {
     String endPojo;
     StringBuilder body;
     EntityShell entityShell;
+    ParamsV1 pv1;
 
     public PojoShell(EntityShell entityShell) {
         this.entityShell = entityShell;
@@ -34,6 +34,7 @@ public class PojoShell extends ToolsShell {
     }
 
     public void constructHeader() {
+        pv1 = new ParamsV1();
         this.fillNamePackage();
         this.fillImports();
         this.fillAnottations();
@@ -43,7 +44,7 @@ public class PojoShell extends ToolsShell {
     }
 
     public void fillNamePackage() {
-        this.namePackage = "package "+ Parameter.POJO_PACKAGE+"\n\n";
+        this.namePackage = "package "+ pv1.getPojoPackageName()+"\n\n";
     }
 
     public void fillImports() {
@@ -72,13 +73,13 @@ public class PojoShell extends ToolsShell {
         entityShell.getAtributesShellList().forEach(atributesShell -> {
             bodyV1.append("private ");
             bodyV1.append(
-                    this.convertType(atributesShell.getTypeAtributes())
+                    this.convertType(atributesShell.getTypeAttributes())
             );
             bodyV1.append(" ");
             bodyV1.append(
-                    (this.isTypeValid(atributesShell.getTypeAtributes())) ?
-                            atributesShell.getNameAtributes():
-                            atributesShell.getNameAtributes()+"Id"
+                    (this.isTypeValid(atributesShell.getTypeAttributes())) ?
+                            atributesShell.getNameAttributes():
+                            atributesShell.getNameAttributes()+"Id"
             );
             bodyV1.append(";\n");
         });

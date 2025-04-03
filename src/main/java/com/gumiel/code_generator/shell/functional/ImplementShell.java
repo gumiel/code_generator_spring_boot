@@ -1,6 +1,6 @@
 package com.gumiel.code_generator.shell.functional;
 
-import com.gumiel.code_generator.shell.Parameter;
+import com.gumiel.code_generator.shell.ParamsV1;
 import com.gumiel.code_generator.shell.commons.UtilShell;
 import com.gumiel.code_generator.shell.objects.DtoShell;
 import com.gumiel.code_generator.shell.objects.EntityShell;
@@ -25,8 +25,10 @@ public class ImplementShell {
     MapperShell mapperShell;
     ServiceShell serviceShell;
     RepositoryShell repositoryShell;
+    ParamsV1 pv1;
 
     public ImplementShell(EntityShell entityShell, DtoShell dtoShell, FilterShell filterShell, PojoShell pojoShell, MapperShell mapperShell, ServiceShell serviceShell, RepositoryShell repositoryShell) {
+        pv1 = new ParamsV1();
         this.entityShell = entityShell;
         this.dtoShell = dtoShell;
         this.filterShell = filterShell;
@@ -54,15 +56,15 @@ public class ImplementShell {
         String implementShellName = this.getNameImplement();
 
         StringBuilder builder = new StringBuilder();
-        builder.append("package "+ Parameter.IMPLEMENT_PACKAGE).append("\n\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".commons.util.PagePojo;\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".entities.*;\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".mappers.").append(mapperShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".repositories.*;\n")
-                .append("import "+ Parameter.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
+        builder.append("package "+ pv1.getImplementPackageName()).append("\n\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".commons.util.PagePojo;\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".dtos.").append(dtoShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".entities.*;\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".filters.").append(filterShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".mappers.").append(mapperShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".pojos.").append(pojoShellName).append(";\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".repositories.*;\n")
+                .append("import "+ ParamsV1.BASE_PACKAGE+".services.").append(serviceShellName).append(";\n")
                 .append("import jakarta.persistence.EntityNotFoundException;\n")
                 .append("import jakarta.transaction.Transactional;\n")
                 .append("import lombok.AllArgsConstructor;\n")

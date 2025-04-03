@@ -41,6 +41,9 @@ public class UtilShell {
     }
 
     public static List<String> listClassesInPackage(String directoryName) throws ClassNotFoundException {
+
+        directoryName = directoryName.replaceFirst("/$", "");
+
         File directory = new File(directoryName);
         List<String> resultList = new ArrayList<>();
 

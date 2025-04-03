@@ -18,16 +18,19 @@ public class MyCommandsV1 {
 
     @ShellMethod(key = "list")
     public List<String> listEntitiesClasses() throws ClassNotFoundException {
-        return UtilShell.listClassesInPackage(Parameter.ENTITIES_NAME_PATH);
+        ParamsV1 pv1 = new ParamsV1();
+        return UtilShell.listClassesInPackage(pv1.getEntityPathName());
     }
 
     @ShellMethod(key = "all")
     public String generateDtoV1(@ShellOption String className, String param) throws ClassNotFoundException {
 
+        ParamsV1 pv1 = new ParamsV1();
+
         Class<?> clazz = null;
         if (!className.contains(".")) {
-            System.out.println(Parameter.ENTITIES_PACKAGE_SIMPLE+className);
-            clazz = Class.forName(Parameter.ENTITIES_PACKAGE_SIMPLE+className);
+            System.out.println(pv1.getEntityPackageName()+className);
+            clazz = Class.forName(pv1.getEntityPackageName()+className);
         }else{
             clazz = Class.forName(className);
         }
@@ -46,8 +49,8 @@ public class MyCommandsV1 {
                 anottationList.add(anottationString);
             }
             atributesShell.setAnottationList(anottationList);
-            atributesShell.setTypeAtributes(field.getType().getSimpleName());
-            atributesShell.setNameAtributes(field.getName());
+            atributesShell.setTypeAttributes(field.getType().getSimpleName());
+            atributesShell.setNameAttributes(field.getName());
             atributesShellList.add(atributesShell);
         }
         entityShell.setAtributesShellList(atributesShellList);
@@ -64,30 +67,31 @@ public class MyCommandsV1 {
         ImplementShell implementShell = new ImplementShell(entityShell, dtoShell, filterShell, pojoShell, mapperShell, serviceShell, repositoryShell);
 
         if(param==null){
-            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), Parameter.DTO_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), Parameter.FILTER_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), Parameter.POJO_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), Parameter.SERVICE_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), Parameter.CONTROLLER_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), Parameter.MAPPER_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), Parameter.REPOSITORY_NAME_PATH);
-            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), Parameter.IMPLEMENT_NAME_PATH);
+
+            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), pv1.getDtoPathName() /*Parameter.DTO_NAME_PATH*/);
+            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), pv1.getFilterPathName());
+            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), pv1.getPojoPathName());
+            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), pv1.getServicePathName());
+            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), pv1.getControllerPathName());
+            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), pv1.getMapperPathName());
+            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), pv1.getRepositoryPathName());
+            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), pv1.getImplementPathName());
         }else if(param.equals("DTO")){
-            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), Parameter.DTO_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Dto_bk", dtoShell.generateDto().toString(), pv1.getDtoPathName()/*Parameter.DTO_NAME_PATH*/);
         } else if (param.equals("FILTER")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), Parameter.FILTER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Filter_bk", filterShell.generateDto().toString(), pv1.getFilterPathName());
         } else if (param.equals("POJO")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), Parameter.POJO_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Pojo_bk", pojoShell.generateDto().toString(), pv1.getPojoPathName());
         } else if (param.equals("SERVICE")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), Parameter.SERVICE_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Service_bk", serviceShell.generateStringService().toString(), pv1.getServicePathName());
         } else if (param.equals("CONTROLLER")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), Parameter.CONTROLLER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Controller_bk", controllerShell.generateStringController().toString(), pv1.getControllerPathName());
         } else if (param.equals("MAPPER")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), Parameter.MAPPER_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Mapper_bk", mapperShell.generateStringMapper().toString(), pv1.getMapperPathName());
         } else if (param.equals("REPOSITORY")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), Parameter.REPOSITORY_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"Repository_bk", repositoryShell.generateStringRepository().toString(), pv1.getRepositoryPathName());
         } else if (param.equals("IMPLEMENT")) {
-            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), Parameter.IMPLEMENT_NAME_PATH);
+            UtilShell.createFile(entityShell.getNameEntity()+"ServiceImpl_bk", implementShell.generateStringImplement().toString(), pv1.getImplementPathName());
         }
 
         return dtoBuilder.toString();
@@ -136,22 +140,23 @@ public class MyCommandsV1 {
 
     @ShellMethod(key = "remove")
     public String removeEntityFile(@ShellOption String className) throws IOException {
+        ParamsV1 pv1 = new ParamsV1();
 
-        String filePath = Parameter.BASE_NAME_PATH + "/dtos/" + className + "Dto_bk.java";
+        String filePath = pv1.getDtoPathName() + className + "Dto_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/filters/" + className + "Filter_bk.java";
+        filePath = pv1.getFilterPathName() + className + "Filter_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/pojos/" + className + "Pojo_bk.java";
+        filePath = pv1.getPojoPathName() + className + "Pojo_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/services/" + className + "Service_bk.java";
+        filePath = pv1.getServicePathName() + className + "Service_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/controllers/" + className + "Controller_bk.java";
+        filePath = pv1.getControllerPathName() + className + "Controller_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/mappers/" + className + "Mapper_bk.java";
+        filePath = pv1.getMapperPathName() + className + "Mapper_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/repositories/" + className + "Repository_bk.java";
+        filePath = pv1.getRepositoryPathName() + className + "Repository_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
-        filePath = Parameter.BASE_NAME_PATH + "/servicesImpls/" + className + "ServiceImpl_bk.java";
+        filePath = pv1.getImplementPathName() + className + "ServiceImpl_bk.java";
         Files.deleteIfExists(Paths.get(filePath));
 
         return "File " + className + " deleted successfully.";
