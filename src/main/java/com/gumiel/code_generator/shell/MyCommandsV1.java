@@ -7,6 +7,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -160,6 +161,37 @@ public class MyCommandsV1 {
         Files.deleteIfExists(Paths.get(filePath));
 
         return "File " + className + " deleted successfully.";
+    }
+
+    @ShellMethod(key = "files")
+    public void createFileEntityFile() throws IOException {
+        crearCarpetasIO(ParamsV1.ENTITIES_PATH_NAME);
+        crearCarpetasIO(ParamsV1.POJO_PATH_NAME);
+        crearCarpetasIO(ParamsV1.DTO_PATH_NAME);
+        crearCarpetasIO(ParamsV1.FILTER_PATH_NAME);
+        crearCarpetasIO(ParamsV1.SERVICE_PATH_NAME);
+        crearCarpetasIO(ParamsV1.CONTROLLER_PATH_NAME);
+        crearCarpetasIO(ParamsV1.MAPPER_PATH_NAME);
+        crearCarpetasIO(ParamsV1.REPOSITORY_PATH_NAME);
+        crearCarpetasIO(ParamsV1.IMPLEMENT_PATH_NAME);
+        crearCarpetasIO(ParamsV1.REPOSITORY_PATH_NAME);
+    }
+
+    public void crearCarpetasIO(String file) {
+        // Crear una carpeta en el directorio del proyecto
+        File carpeta = new File("."+ParamsV1.BASE_NAME_PATH+"/"+file);
+
+        if(!carpeta.exists()) {
+            boolean creado = carpeta.mkdirs(); // mkdirs() para múltiples niveles
+            if (creado) {
+                System.out.println("Directorio creado: " + carpeta.getAbsolutePath());
+            } else {
+                System.out.println("No se pudo crear el directorio");
+            }
+        } else {
+            System.out.println("El directorio ya existe");
+        }
+
     }
 
 
