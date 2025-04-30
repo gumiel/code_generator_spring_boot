@@ -51,7 +51,6 @@ public class DtoShell extends ToolsShell {
         importList = new ArrayList<>();
         importList.add(new StringBuilder("import java.time.LocalDateTime;\n"));
         importList.add(new StringBuilder("import java.math.BigDecimal;\n"));
-        importList.add(new StringBuilder("import java.time.LocalDateTime;\n"));
         importList.add(new StringBuilder("import java.time.LocalDate;\n"));
         importList.add(new StringBuilder("import java.time.LocalTime;\n"));
         importList.add(new StringBuilder("import lombok.Getter;\n"));

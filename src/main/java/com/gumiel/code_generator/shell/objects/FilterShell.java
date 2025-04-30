@@ -51,14 +51,11 @@ public class FilterShell extends ToolsShell {
         importList = new ArrayList<>();
         importList.add(new StringBuilder("import java.time.LocalDateTime;\n"));
         importList.add(new StringBuilder("import java.math.BigDecimal;\n"));
-        importList.add(new StringBuilder("import java.time.LocalDateTime;\n"));
         importList.add(new StringBuilder("import java.time.LocalDate;\n"));
         importList.add(new StringBuilder("import java.time.LocalTime;\n"));
         importList.add(new StringBuilder("import lombok.Getter;\n"));
-        importList.add(new StringBuilder("import lombok.Setter;\n"));
         importList.add(new StringBuilder("import lombok.Builder;\n"));
         importList.add(new StringBuilder("import lombok.ToString;\n"));
-        importList.add(new StringBuilder("import lombok.NoArgsConstructor;\n"));
         importList.add(new StringBuilder("\n"));
     }
 

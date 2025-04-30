@@ -68,6 +68,7 @@ public class ControllerShell extends ToolsShell {
                 .append("import org.springframework.http.ResponseEntity;\n")
                 .append("import org.springframework.web.bind.annotation.*;\n")
                 .append("\n")
+                .append("import java.math.BigDecimal;\n")
                 .append("import java.time.LocalDate;\n")
                 .append("import java.time.LocalTime;\n")
                 .append("import java.time.LocalDateTime;\n")

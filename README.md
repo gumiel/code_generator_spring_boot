@@ -9,6 +9,7 @@ Tiene tambien la particularidad de poder generar codigo tambien solo de las clas
 ## Comando CLI
 Un resumen completo de los comando seria
 ```bash
+files # Crea todas las carpetas que se usaran para las clases generadas
 all Person # Crea todas las clases Persona de dto, filter, mapper, controller, service, implement y repository
 remove Person # Elimina todas las clases Persona de dto, filter, mapper, controller, service, implement y repository
 dto Person # Crea solo la clase PersonaDto en la carpeta /dtos

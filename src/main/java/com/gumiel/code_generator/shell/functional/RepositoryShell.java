@@ -51,7 +51,6 @@ public class RepositoryShell extends ToolsShell {
                 .append("import java.util.List;\n")
                 .append("import java.util.Optional;\n\n")
                 .append("public interface ").append(repositoryShellName).append(" extends JpaRepository<").append(entityShellName).append(", Integer> {\n\n")
-                .append("  boolean existsByCodeAndActiveIsTrue(String code);\n\n")
                 .append("  List<").append(entityShellName).append("> findByActiveTrue();\n\n")
                 .append("  Optional<").append(entityShellName).append("> findByIdAndActiveIsTrue(Integer id);\n\n")
                 .append("  Page<").append(entityShellName).append("> findAll(Pageable pageable);\n")

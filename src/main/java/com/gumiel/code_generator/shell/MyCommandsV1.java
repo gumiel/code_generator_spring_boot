@@ -189,7 +189,7 @@ public class MyCommandsV1 {
                 System.out.println("No se pudo crear el directorio");
             }
         } else {
-            System.out.println("El directorio ya existe");
+            System.out.println("El directorio"+ carpeta.getAbsolutePath()+" ya existe");
         }
 
     }
