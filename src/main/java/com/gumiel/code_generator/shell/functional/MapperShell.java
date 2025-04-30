@@ -89,7 +89,9 @@ public class MapperShell extends ToolsShell {
             bodyV1.append(
                     (this.isTypeValid(attributesShell.getTypeAttributes())) ?
                             "    pojo.set"+attributeUpperCase+"( entity.get"+attributeUpperCase+"() );":
-                            "    pojo.set"+attributeUpperCase+"Id( entity.get"+attributeUpperCase+"Id() );"
+                            "    if(entity.get"+attributeUpperCase+"()!=null){\n" +
+                            "        pojo.set"+attributeUpperCase+"Id( entity.get"+attributeUpperCase+"().getId() );\n" +
+                            "    }\n"
             );
             bodyV1.append("\n");
         });
@@ -104,7 +106,7 @@ public class MapperShell extends ToolsShell {
                 bodyV1.append(
                         (this.isTypeValid(attributesShell.getTypeAttributes())) ?
                                 "    entity.set"+attributeUpperCase+"( dto.get"+attributeUpperCase+"() );":
-                                "    entity.set"+attributeUpperCase+"Id( dto.get"+attributeUpperCase+"Id() );"
+                                " "
                 );
                 bodyV1.append("\n");
             }
